@@ -84,7 +84,7 @@ public class SucursalesFragment extends Fragment {
             case R.id.action_add:
                 Toast.makeText(getContext(), "Hola Sucursales", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), FormMapsActivity.class);
-                //intent.putExtra("name","SUCURSALES");
+                intent.putExtra("name","SUCURSALES");
                 startActivity(intent);
 
                 return true;

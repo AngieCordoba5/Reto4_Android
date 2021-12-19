@@ -14,6 +14,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.lights.LightsManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -45,6 +47,9 @@ import com.example.reto3.databinding.ActivityFormMapsBinding;
 import org.osmdroid.config.Configuration;
 
 public class FormMapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    private LocationManager locationManager;
+    private Location location;
 
     private Button insertar_s, consultar_s, eliminar_s, actualizar_s, escoger_s;
     private EditText id_s, name_s, description_s;
@@ -137,11 +142,16 @@ public class FormMapsActivity extends FragmentActivity implements OnMapReadyCall
         actualizar_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llenarCampos();
-                dbHelper.updateSucursalById("Sucursales", idInsert, nameInsert, descriptionInsert, locationInsert, imageInsert);
-                limpiarCampos();
-                View view = findViewById(R.id.linearLayoutMaps);
-                Snackbar.make(view,"Se ha Actualizado Correctamente",Snackbar.LENGTH_SHORT).show();
+                try{
+                    llenarCampos();
+                    dbHelper.updateSucursalById("SUCURSALES", idInsert, nameInsert, descriptionInsert, locationInsert, imageInsert);
+                    limpiarCampos();
+                    View view = findViewById(R.id.linearLayoutMaps);
+                    Snackbar.make(view,"Se ha Actualizado Correctamente",Snackbar.LENGTH_SHORT).show();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -168,13 +178,13 @@ public class FormMapsActivity extends FragmentActivity implements OnMapReadyCall
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
 
-        int zoom = 5;
+        //locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         // Add a marker in Sydney and move the camera
         LatLng bogota = new LatLng(3.52, -72);
         //googleMap.addMarker(new MarkerOptions().position(bogota).title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bogota, zoom));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bogota, 5));
 
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -239,6 +249,6 @@ public class FormMapsActivity extends FragmentActivity implements OnMapReadyCall
         name_s.setText("");
         description_s.setText("");
         location_s.setText("");
-        image_s.setImageResource(R.mipmap.ic_launcher);
+        image_s.setImageResource(R.drawable.home1);
     }
 }

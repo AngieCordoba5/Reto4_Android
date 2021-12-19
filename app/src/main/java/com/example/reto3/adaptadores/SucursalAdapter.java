@@ -73,7 +73,7 @@ public class SucursalAdapter extends BaseAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Hola Mapa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),sucursal.getLocation(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ShowMapsActivity.class);
                 intent.putExtra("name", sucursal.getName() );
                 intent.putExtra("location", sucursal.getLocation() );

@@ -18,7 +18,13 @@ import com.example.reto3.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    /***
+     *
+     */
     private AppBarConfiguration mAppBarConfiguration;
+    /**
+     *
+     */
     private ActivityMainBinding binding;
 
     @Override

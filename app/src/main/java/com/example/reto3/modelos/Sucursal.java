@@ -20,9 +20,7 @@ public class Sucursal {
 
     public Sucursal(String name, String location) {
         this.name = name;
-
         this.location = location;
-
     }
     public Sucursal(){}
 

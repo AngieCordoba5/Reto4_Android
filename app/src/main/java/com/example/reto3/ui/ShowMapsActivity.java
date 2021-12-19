@@ -54,7 +54,7 @@ public class ShowMapsActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
 
         // Add a marker in Sydney and move the camera
-        LatLng init = new LatLng(-34, 151);
+        LatLng init = sucursal.locationToCoord();
         googleMap.addMarker(new MarkerOptions().position(init).title(sucursal.getName()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(init,7));
     }
